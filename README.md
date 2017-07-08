@@ -13,7 +13,8 @@ After this is downloaded run the setup file
 After that the program is ready to be used       
 Run the login file to start the program      
 
-Donations are thanked
-BTC: 1A9xs1YWd4HA5iAPGTG1gLn3Y8ne5oj1qi       
-XMR: 4BrL51JCc9NGQ71kWhnYoDRffsDZy7m1HUU7MRU4nUMXAHNFBEJhkTZV9HdaL4gfuNBxLPc3BeMkLGaPbF5vWtANQobrUMzM7zyJYmHazL       
-LTC: LdxTBrLA7FWqoNEdisZ2rA9iz2BTFs2Axd 
+Donations are thanked          
+BTC:  1A9xs1YWd4HA5iAPGTG1gLn3Y8ne5oj1qi                            
+LTC:  LdxTBrLA7FWqoNEdisZ2rA9iz2BTFs2Axd           
+All donations are used for my next program            
+            
