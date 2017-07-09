@@ -35,14 +35,15 @@ setDefault() {
 #Prints out name of the author
 ad() {
 	clear
-	echo ''
+	
+	echo -e '\n\n\033[0;35m'
 	echo '         ╔╗────╔╗'
 	echo '         ║║╔═╦═╬╬═╦╗'
 	echo '         ║╚╣╬║╬║║║║║'
 	echo '         ╚═╩═╬╗╠╩╩═╝'
 	echo '         ────╚═╝'
-	echo '      Brought to you by'
-	echo ''
+	echo -e '\033[0m      Brought to you by'
+	echo -e '\033[1;33m'
 	echo '   ░█─░█ ▀█▀ ░█──░█ ░█▀▀▀'
 	echo '   ░█▀▀█ ░█─ ─░█░█─ ░█▀▀▀' 
 	echo '   ░█─░█ ▄█▄ ──▀▄▀─ ░█▄▄▄' 
@@ -58,14 +59,13 @@ ad() {
 	echo '    \      /    \      /'
 	echo '     \____/      \____/'
 	echo '          \      /'
-	echo '           \____/'
-	echo ''
+	echo -e '           \____/\033[0m'
 	sleep 2
 }
 #Prints out the name of the program
 login() {
 	clear
-	echo ''
+	echo -e '\033[0;35m'
 	echo '      ╔╗'
 	echo '      ║║'
 	echo '      ║║──╔══╦══╦╦═╗'
@@ -74,7 +74,7 @@ login() {
 	echo '      ╚═══╩══╩═╗╠╩╝╚╝'
 	echo '      ───────╔═╝║'
 	echo '      ───────╚══╝'
-	echo ''
+	echo -e '\033[0m'
 }
 #This function is called by the check function. This tries to brute
 #force the login for the current ip address through telnet
@@ -102,10 +102,10 @@ loginSSH() {
 check() {
 	ip=$1
 	if pnscan $ip $port | grep -q $port; then
-		echo $ip port $port open
+		echo -e '\033[0;32m$ip\033[0m port $port open'
 		loginSSH
 	elif pnscan $ip $port1 | grep -q $port1; then
-		echo $ip port $port1 open
+		echo -e '\033[0;32m$ip\033[0m port $port1 open'
 		loginTelnet
 	else
 		pkill -9 pnscan
@@ -148,39 +148,45 @@ getEnd() {
 }
 #Used to set ip addresses
 setIp() {
-	read -p 'Enter ip to start at: ' startIp
-	read -p 'Enter ip to end at: ' endIp
+	echo -ne '\033[0;35mEnter ip to start at\033[0m: '
+	read startIp
+	echo -ne '\033[0;035mEnter ip to end at\033[0m: ' 
+	read endIp
 	getStart $startIp
 	getEnd $endIp
 }
 #Sets the number of tasks for hydra
 setTasks() {
-	read -p 'Enter the number of tasks for hydra(Default=4): ' enteredTask
+	echo -ne 'Enter the number of tasks for hydra(Default=4): ' 
+	read -enteredTask
 	tasks=$enteredTask
 }
 #Shows all of the variables that have been set
 show() {
 	echo ''
-	echo 'Variables'
-	echo 'IP address to start on: '$startA$per$startB$per$startC$per$startD
-	echo 'IP address to end on: '$endA$per$endB$per$endC$per$endD
-	echo 'Hydra tasks: '$tasks
-	echo "Word lists: $userFile $passFile"
+	echo -e '\e[4mVariables\e[0m'
+	echo 'Start ip address: '$startA$per$startB$per$startC$per$startD
+	echo 'End ip address:   '$endA$per$endB$per$endC$per$endD
+	echo 'Hydra tasks:      '$tasks
+	echo "Word lists:        $userFile $passFile"
 	echo ''
 }
 #Sets the usernames word list
 setUser() {
-	read -p 'Enter path to username word list: ' username
+	echo -ne  '\033[0;035mEnter path to username word list\033[0m: '
+	read username
 	userFile=$username
 }
 #Sets the passwords word list
 setPass() {
-	read -p 'Enter path to password word list: ' password
+	echo -ne '\033[0;35mEnter path to password word list\033[0m: ' 
+	read password
 	passFile=$password
 }
 #Sets one word list for both username and passwords
 setOneBoth() {
-	read -p 'Enter path to word list: ' wordListPath
+	echo -ne '\033[0;35mEnter path to word list\033[0m: ' 
+	read wordListPath
 	userFile=$wordListPath
 	passFile=$wordListPath
 }
@@ -188,15 +194,16 @@ setOneBoth() {
 #The word lists are used for hydra
 setWordLists() {
 	login
-	echo '          Options'
+	echo -e '          \e[4mOptions\e[0m'
 	echo '(1) Set username word list'
 	echo '(2) Set password word list'
 	echo '(3) Set one list for both'
 	echo '(4) Set both with different lists'
 	echo '(5) Exit'
-	echo 'Enter the number of the option you want'
+	echo -e '\e[1mEnter the number of the option you want\e[0m'
 	echo ''
-	read -p 'Login: ' op
+	echo -ne '\033[0;35mLogin\033[0m: '
+	read op
 	if (( $op == 1 ));then
 		setUser;clear
 	elif (( $op == 2 ));then
@@ -216,7 +223,7 @@ setWordLists() {
 #Gives you options to choose from
 options() {
 	login;
-	echo '           Options'
+	echo -e '           \e[4mOptions\e[0m'
 	echo '(1) Set default settings' 
 	echo '(2) Set ip address'
 	echo '(3) Set number of tasks for hydra'
@@ -225,13 +232,14 @@ options() {
 	echo '(6) Run the program with the set variables'
 	echo '(7) Help (Show this list)'
 	echo '(8) Exit'
-	echo 'Enter the number of the option you want'
+	echo -e '\e[1mEnter the number of the option you want\e[0m'
 	echo ''
 }
 #Runs a function based on the option
 #that the user choses
 main() {
-	read -p 'Login: ' option
+	echo -ne '\033[0;35mLogin\033[0m: ' 
+	read option
 	#If an option is entered other then run the user will be returned 
 	#to the begining of this function
 	if (( $option == 1 ));then	
