@@ -8,7 +8,7 @@
 ───────╚══╝    
 ======================
 IOT device brute force login tool          
-This program was made to check IOT devices for comman passwords
+This program was made to check IOT devices for common passwords
 
 ### How it works    
 This uses Hydra for brute forcing and pnscan for port scanning        
