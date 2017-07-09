@@ -60,7 +60,7 @@ ad() {
 	echo '          \      /'
 	echo '           \____/'
 	echo ''
-	sleep 5
+	sleep 2
 }
 #Prints out the name of the program
 login() {
@@ -109,13 +109,8 @@ check() {
 		loginTelnet
 	else
 		pkill -9 pnscan
+		echo -e "\033[0;31m$ip\033[0m"
 	fi
-}
-#Prints out the current ip address and then calls the check function
-start() {
-	ip=$1$per$2$per$3$per$4
-	echo $ip
-	check $ip
 }
 #The main loop and what the program goes to when the user 
 #chooses the run option on the main function
@@ -123,6 +118,7 @@ start() {
 #the loop goes through and when it hits the end ip address
 #it stops
 mainLoop() {
+	echo 'Checking the addresses for open ports...'
 	for (( A=$startA; A<=$endA; A++ ))
 	do
 		for (( B=$startB; B<=$endB; B++ ))
@@ -131,8 +127,8 @@ mainLoop() {
 			do
 				for (( D=$startD; D<=$endD; D++ ))
 				do
-					#ip=$A$per$B$per$C$per$D
-					start $A $B $C $D;
+					ip=$A$per$B$per$C$per$D
+					check $ip
 				done
 			done
 		done
@@ -164,11 +160,13 @@ setTasks() {
 }
 #Shows all of the variables that have been set
 show() {
-	echo 'Set Variables'
+	echo ''
+	echo 'Variables'
 	echo 'IP address to start on: '$startA$per$startB$per$startC$per$startD
 	echo 'IP address to end on: '$endA$per$endB$per$endC$per$endD
 	echo 'Hydra tasks: '$tasks
-	echo 'Word lists: $userFile $passFile'
+	echo "Word lists: $userFile $passFile"
+	echo ''
 }
 #Sets the usernames word list
 setUser() {
@@ -190,7 +188,7 @@ setOneBoth() {
 #The word lists are used for hydra
 setWordLists() {
 	login
-	echo '        Options'
+	echo '          Options'
 	echo '(1) Set username word list'
 	echo '(2) Set password word list'
 	echo '(3) Set one list for both'
@@ -216,23 +214,27 @@ setWordLists() {
 	fi
 }
 #Gives you options to choose from
-#Then runs a function based on the option
-#that the user chose
-main() {
-	echo '        Options'
+options() {
+	login;
+	echo '           Options'
 	echo '(1) Set default settings' 
 	echo '(2) Set ip address'
 	echo '(3) Set number of tasks for hydra'
 	echo '(4) Show current set variables'
 	echo '(5) Set word lists'
 	echo '(6) Run the program with the set variables'
-	echo '(7) Exit'
+	echo '(7) Help (Show this list)'
+	echo '(8) Exit'
 	echo 'Enter the number of the option you want'
 	echo ''
+}
+#Runs a function based on the option
+#that the user choses
+main() {
 	read -p 'Login: ' option
 	#If an option is entered other then run the user will be returned 
 	#to the begining of this function
-	if (( $option == 1 ));then
+	if (( $option == 1 ));then	
 		setDefault;
 		main;
 	elif (( $option == 2 ));then
@@ -241,21 +243,26 @@ main() {
 	elif (( $option == 3 ));then
 		setTasks;
 		main;
-	elif (( $option == 4 ));then
+	elif (( $option == 4 )) || [ "$option" == "show" ];then
 		show;
 		main;
 	elif (( $option == 5 ));then
 		setWordLists;
 		main;
-	elif (( $option == 6 ));then
+	elif (( $option == 6 )) || [ "$option" == "run" ];then
+		login;
 		mainLoop;
-	elif (( $option == 7 )) || [ "$option" == "Exit" ];then
+	elif (( $option == 7 )) || [ "$option" == "Exit" ] || [ "$option" == "exit" ];then
 		exit
+	elif [ "$option" == "help" ] || [ "$option" == "Help" ] || (( $option == 8 ));then
+		options;
+		main;
 	else #If the user enters something that isnt an option it 
 	     #goes back to the begining of this function
-		clear
+		echo -e "\033[0;31m$option is not valid\033[0m"
 		main;
 	fi
 }
 ad;
+options;
 main;
