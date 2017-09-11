@@ -81,20 +81,16 @@ login() {
 #This logs information into the login.log file which is where all of the
 #found logins can be found
 loginTelnet() {
-	echo $ip trying to login via telnet
-	if (( $restore==0 ));then
-		hydra -v -V -o login.log -f -e nsr -s $port1 -L $userFile -P $passFile -t $tasks $ip telnet
-	fi
+	echo "$ip trying to login via telnet"
+	hydra -v -V -o login.log -f -e nsr -s $port1 -L $userFile -P $passFile -t $tasks $ip telnet
 }
 #This function is called by the check function. This tries to brute
 #force the login for the current ip address through ssh
 #This logs information into the login.log file which is where all of the
 #found logins can be found
 loginSSH() {
-	echo $ip trying to login via ssh
-	if (( $restore==0 ));then
-		hydra -v -V -o login.log -f -e nsr -s $port -L $userFile -P $passFile -t $tasks $ip ssh
-	fi
+	echo "$ip trying to login via ssh"
+	hydra -v -V -o login.log -f -e nsr -s $port -L $userFile -P $passFile -t $tasks $ip ssh
 }
 #This function checks if the current ip address has either port 22
 #or port 23 open. If the ip address has one of those ports open it 
@@ -102,10 +98,10 @@ loginSSH() {
 check() {
 	ip=$1
 	if pnscan $ip $port | grep -q $port; then
-		echo -e '\033[0;32m$ip\033[0m port $port open'
+		echo -e "\033[0;32m'$ip\033[0m port $port open"
 		loginSSH
 	elif pnscan $ip $port1 | grep -q $port1; then
-		echo -e '\033[0;32m$ip\033[0m port $port1 open'
+		echo -e "\033[0;32m$ip\033[0m port $port1 open"
 		loginTelnet
 	else
 		pkill -9 pnscan
@@ -148,17 +144,17 @@ getEnd() {
 }
 #Used to set ip addresses
 setIp() {
-	echo -ne '\033[0;35mEnter ip to start at\033[0m: '
+	echo -ne "\033[0;35mEnter ip to start at\033[0m: "
 	read startIp
-	echo -ne '\033[0;035mEnter ip to end at\033[0m: ' 
+	echo -ne "\033[0;035mEnter ip to end at\033[0m: "
 	read endIp
 	getStart $startIp
 	getEnd $endIp
 }
 #Sets the number of tasks for hydra
 setTasks() {
-	echo -ne 'Enter the number of tasks for hydra(Default=4): ' 
-	read -enteredTask
+	echo "Enter the number of tasks for hydra(Default=4): " 
+	read enteredTask
 	tasks=$enteredTask
 }
 #Shows all of the variables that have been set
@@ -173,19 +169,19 @@ show() {
 }
 #Sets the usernames word list
 setUser() {
-	echo -ne  '\033[0;035mEnter path to username word list\033[0m: '
+	echo -ne  "\033[0;035mEnter path to username word list\033[0m: "
 	read username
 	userFile=$username
 }
 #Sets the passwords word list
 setPass() {
-	echo -ne '\033[0;35mEnter path to password word list\033[0m: ' 
+	echo -ne "\033[0;35mEnter path to password word list\033[0m: "
 	read password
 	passFile=$password
 }
 #Sets one word list for both username and passwords
 setOneBoth() {
-	echo -ne '\033[0;35mEnter path to word list\033[0m: ' 
+	echo -ne "\033[0;35mEnter path to word list\033[0m: " 
 	read wordListPath
 	userFile=$wordListPath
 	passFile=$wordListPath
