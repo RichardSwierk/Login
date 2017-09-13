@@ -98,7 +98,7 @@ loginSSH() {
 check() {
 	ip=$1
 	if pnscan $ip $port | grep -q $port; then
-		echo -e "\033[0;32m'$ip\033[0m port $port open"
+		echo -e "\033[0;32m$ip\033[0m port $port open"
 		loginSSH
 	elif pnscan $ip $port1 | grep -q $port1; then
 		echo -e "\033[0;32m$ip\033[0m port $port1 open"
