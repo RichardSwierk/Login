@@ -241,16 +241,16 @@ main() {
 	if (( $option == 1 ));then	
 		setDefault;
 		main;
-	elif (( $option == 2 ));then
+	elif (( $option == 2 )) || [[ $option == "set ip" ]] || [[ $option == "set IP" ]];then
 		setIp;
 		main;
-	elif (( $option == 3 ));then
+	elif (( $option == 3 )) || [[ $option == "set tasks" ]];then
 		setTasks;
 		main;
 	elif (( $option == 4 )) || [ "$option" == "show" ];then
 		show;
 		main;
-	elif (( $option == 5 ));then
+	elif (( $option == 5 )) || [[ $option == "set lists" ]] || [[ $option == "set list" ]];then
 		setWordLists;
 		main;
 	elif (( $option == 6 )) || [ "$option" == "run" ];then
