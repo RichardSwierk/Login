@@ -98,10 +98,10 @@ loginSSH() {
 check() {
 	ip=$1
 	if pnscan $ip $port | grep -q $port; then
-		echo -e "\033[0;32m$ip\033[0m port $port open"
+		echo -e "\033[0;32m$ip port $port open\033[0m"
 		loginSSH
 	elif pnscan $ip $port1 | grep -q $port1; then
-		echo -e "\033[0;32m$ip\033[0m port $port1 open"
+		echo -e "\033[0;32m$ip port $port1 open\033[0m"
 		loginTelnet
 	else
 		pkill -9 pnscan
@@ -153,7 +153,7 @@ setIp() {
 }
 #Sets the number of tasks for hydra
 setTasks() {
-	echo "Enter the number of tasks for hydra(Default=4): " 
+	echo -ne "\033[0;35mEnter the number of tasks for hydra(Default=4)\033[0m: " 
 	read enteredTask
 	tasks=$enteredTask
 }
