@@ -19,9 +19,4 @@ Hydra logs everything to the login.log file
 ### Instructions         
 +1. Clone the repository        
 +2. Run the setup.sh file               
-+3. Run the login.sh file to start the program          
-
-### Please Donate                 
-BTC:  1A9xs1YWd4HA5iAPGTG1gLn3Y8ne5oj1qi                            
-LTC:  LdxTBrLA7FWqoNEdisZ2rA9iz2BTFs2Axd           
-All donations are used for my next program            
++3. Run the login.sh file to start the program                   
