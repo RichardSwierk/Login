@@ -9,7 +9,7 @@ This is still being worked on
 ───────╔═╝║          
 ───────╚══╝    
 ======================
-IOT device brute force login tool          
+IOT device brute force tool          
 This program was made to check IOT devices for common passwords
 
 ### How it works    
