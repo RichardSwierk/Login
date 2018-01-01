@@ -1,5 +1,4 @@
 #!/bin/bash
-#Author: HIVE
 #Port numbers
 port=22;port1=23;
 #Used to make the ip address
@@ -31,36 +30,6 @@ setDefault() {
 	passFile=pass.txt
 	#Default number of tasks for hydra
 	tasks=4
-}
-#Prints out name of the author
-ad() {
-	clear
-	
-	echo -e '\n\n\033[0;35m'
-	echo '         ╔╗────╔╗'
-	echo '         ║║╔═╦═╬╬═╦╗'
-	echo '         ║╚╣╬║╬║║║║║'
-	echo '         ╚═╩═╬╗╠╩╩═╝'
-	echo '         ────╚═╝'
-	echo -e '\033[0m      Brought to you by'
-	echo -e '\033[1;33m'
-	echo '   ░█─░█ ▀█▀ ░█──░█ ░█▀▀▀'
-	echo '   ░█▀▀█ ░█─ ─░█░█─ ░█▀▀▀' 
-	echo '   ░█─░█ ▄█▄ ──▀▄▀─ ░█▄▄▄' 
-	echo '            ____'
-	echo '           /    \'
-	echo '      ____/      \____'
-	echo '     /    \      /    \'
-	echo '    /      \____/      \'
-	echo '    \      /    \      /'
-	echo '     \____/      \____/'
-	echo '     /    \      /    \'
-	echo '    /      \____/      \'
-	echo '    \      /    \      /'
-	echo '     \____/      \____/'
-	echo '          \      /'
-	echo -e '           \____/\033[0m'
-	sleep 2
 }
 #Prints out the name of the program
 login() {
@@ -267,6 +236,5 @@ main() {
 		main;
 	fi
 }
-ad;
 options;
 main;
